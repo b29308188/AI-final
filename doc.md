@@ -13,7 +13,7 @@ https://groups.google.com/forum/#!forum/qicpc
 results and the trace files-- can be used to find others' strategies 
 http://queue.acm.org/challenge/2012/tournament/tournament.html
 
-related code in guthub
+related code in github--
 https://github.com/hoganlong/ICPC-Entry
 
 This week works(5/26~6/2)--

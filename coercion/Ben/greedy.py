@@ -15,7 +15,7 @@ import random
 import sys
 import string
 import math
-
+import numpy as np
 # Width and height of the world in game units.
 FIELD_SIZE = 100
   
@@ -240,6 +240,10 @@ def getBehind( p, m, target, force ):
 # region.
 def atHome( m ):
 	return ( m.pos.x < HOME_SIZE + MARKER_RADIUS and m.pos.y < HOME_SIZE + MARKER_RADIUS )
+def isRedHome(x, y):
+	return ( x < HOME_SIZE  and y < HOME_SIZE )
+def isBlueHome(x, y):
+	return ( x > FIELD_SIZE- HOME_SIZE  and y > FIELD_SIZE- HOME_SIZE )
 
 # Return a random field locatmion where we could move a marker.
 def randomFieldPosition():
@@ -281,6 +285,7 @@ regionColors = [ GREY for x in regionList ]
 pList = [ Pusher() for x in range( 2 * PCOUNT ) ]
 mList = []
 
+log_file = open("log", "w")
 turnNum = int( sys.stdin.readline() )
 while turnNum >= 0:
 	tokens = string.split( sys.stdin.readline() )
@@ -328,44 +333,47 @@ while turnNum >= 0:
 				p.busy = False
 	
 		if not p.busy:
-			# Choose a random marker.
-
-			#robber : rob others marker
-                        mdex = None
-                        for i in range(len(mList)):
-				m = mList[i]
-                                if m.color is BLUE:
-                                        mdex = i
-                                        available = True
-					#check whether our other pushers are robbing this marker
-                                        for j in range( PCOUNT ):
-                                                if  j != pdex and pList[ j ].busy and pList[ j ].mdex == mdex :
-                                                        available = False
-					#check if this marker is already in our home
-					if atHome(m):
-						available = False
-					#rob it!!!!
-                                        if available is True:
-						break
-
-			#the opponent has no marker 
-			if mdex is None:
-            			mdex = rnd.randint( 0, len( mList ) - 1 )
-
-			if mdex is not None:
-				if mList[ mdex ].color == RED:
-					# Move it to a random spot on the field.
-					p.mdex = mdex
-					p.targetPos = randomFieldPosition()
-					p.busy = True
-					p.jobTime = 0
-				else:
-					# This marker isn't our color, try to move it to our
-					# home and convert it.
-					p.mdex = mdex
-					p.targetPos = Vector2D( 10, 10 )
-					p.busy = True
-					p.jobTime = 0
+			searchSpace = [(i, j) for i in range(len(mList)) for j in range(len(regionList))]
+			D = {}
+			for (mi , ri) in searchSpace:
+				x = np.mean([vertexList[v].x for v in regionList[ri]]) 
+				y = np.mean([vertexList[v].y for v in regionList[ri]]) 
+				numRedMarkers = 0.0
+				numBlueMarkers = 0.0
+				numRedRegions = 0.0
+				numBlueRegions = 0.0
+				if mList[mi].color is BLUE and regionColors[ri] is RED:
+					numRedMarkers += 1.0/40
+					numBlueMarkers -= 1.0/20
+					if not isRedHome(x, y):
+						numRedRegions -= 1.0/20
+				elif mList[mi].color is BLUE and regionColors[ri] is GREY:
+					numBlueMarkers -= 1.0/40
+					numBlueRegions += 1.0/20
+				elif mList[mi].color is RED and regionColors[ri] is BLUE:
+					numBlueMarkers += 1.0/40
+					numRedMarkers -= 1.0/40
+					if not isBlueHome(x, y):
+						numBlueRegions -= 1.0/20
+				elif mList[mi].color is RED and regionColors[ri] is GREY:
+					numRedMarkers -= 1.0/40
+					numRedRegions += 1.0/20
+				elif mList[mi].color is GREY and regionColors[ri] is BLUE:
+					numBlueMarkers += 1.0/40
+					if not isBlueHome(x, y):
+						numBlueRegions -= 1.0/20
+				elif mList[mi].color is GREY and regionColors[ri] is RED:
+					numRedMarkers += 1.0/40
+					if not isRedHome(x, y):
+						numRedRegions -= 1.0/20
+				D[(mi, x, y)] =  numRedMarkers - numBlueMarkers +numRedRegions - numBlueRegions
+			
+			(mdex, x, y) = max(D, key = D.get)
+			p.mdex = mdex
+			p.targetPos = Vector2D(x, y)
+			#sys.stderr.write(str(x)+"\t"+str(y)+"\n")
+			p.busy = True
+			p.jobTime = 0
 
 		# Choose a move direction in support of our current goal.
 		force = Vector2D( 0, 0 )

@@ -1,18 +1,22 @@
-1.How does it works?
-(1)Introduce  our game
+Group 33
+1.How does it works?(40 secs)
+(1)Introduce our game and the game rules
 (2)Introduce the different agents
-(3)Compare them
+- sample agents : gather, migrate
+— heuristics :  robber, gather-migrate
+- agents with utility function: greedy  
+  1 games:
+robber v.s. gather-migrate
 
-40 secs
+*(3)Compare them
 
-2.What is the greatest challenge?
-(1) Continuous coordinate 
-(2) few previous works
 
-3.Sol.
-(1) make our problem into discete by
-  -- define the search space with some tricks
-  -- use huestics that only consider markers
-(2) compare agents with the two sample agents/ watch pervious videos
+2.What is the greatest challenge and how do we solve it?(30secs)
+(1) approximate continuous spatial data with discrete information
+  -- define the search space by only consider which marker to move
+     and the position to move the marker to
 
-30secs
+(2) few previous works and this is a two-agent game. It’s hard to evaluate our work.
+  — compare agents with the two sample agents/ watch pervious videos
+
+

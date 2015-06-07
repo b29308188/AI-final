@@ -335,9 +335,14 @@ while turnNum >= 0:
 		if not p.busy:
 			searchSpace = [(i, j) for i in range(len(mList)) for j in range(len(regionList))]
 			D = {}
-			for (mi , ri) in searchSpace:
+			P = {}
+			for ri in range(len(regionList)):
 				x = np.mean([vertexList[v].x for v in regionList[ri]]) 
 				y = np.mean([vertexList[v].y for v in regionList[ri]]) 
+				P[ri] = (x, y)
+
+			for (mi , ri) in searchSpace:
+				(x, y) = P[ri]
 				numRedMarkers = 0.0
 				numBlueMarkers = 0.0
 				numRedRegions = 0.0
@@ -366,7 +371,7 @@ while turnNum >= 0:
 					numRedMarkers += 1.0/40
 					if not isRedHome(x, y):
 						numRedRegions -= 1.0/20
-				D[(mi, x, y)] =  numRedMarkers - numBlueMarkers +numRedRegions - numBlueRegions
+				D[(mi, x, y)] =  10*numRedMarkers - numBlueMarkers +10*numRedRegions - numBlueRegions
 			
 			(mdex, x, y) = max(D, key = D.get)
 			p.mdex = mdex
@@ -374,6 +379,7 @@ while turnNum >= 0:
 			#sys.stderr.write(str(x)+"\t"+str(y)+"\n")
 			p.busy = True
 			p.jobTime = 0
+			#sys.stderr.write(str(p.mdex)+"\t"+str(p.targetPos.x)+"\t"+str(p.targetPos.y)+"\n")
 
 		# Choose a move direction in support of our current goal.
 		force = Vector2D( 0, 0 )

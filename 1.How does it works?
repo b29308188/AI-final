@@ -1,0 +1,18 @@
+1.How does it works?
+(1)Introduce  our game
+(2)Introduce the different agents
+(3)Compare them
+
+40 secs
+
+2.What is the greatest challenge?
+(1) Continuous coordinate 
+(2) few previous works
+
+3.Sol.
+(1) make our problem into discete by
+  -- define the search space with some tricks
+  -- use huestics that only consider markers
+(2) compare agents with the two sample agents/ watch pervious videos
+
+30secs

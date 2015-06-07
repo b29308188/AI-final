@@ -22,6 +22,9 @@ FIELD_SIZE = 100
 # Number of pushers per side.
 PCOUNT = 3
 
+# Number of total markers
+MCOUNT = 22
+
 # Radius of the pusher.
 PUSHER_RADIUS = 1
 
@@ -167,6 +170,13 @@ class Region:
     def __init__( self ):
         self.color = GREY
         self.markers = []
+        self.vertices = []
+
+class Vertex:
+    def __init__(self):
+        self.pos = Vector3D(0,0,0)
+        # colors is a bitmap of colors incident on this vertex.
+        self.colors = 0
 
 
 # Return a copy of x that's constrained to be between low and high.
@@ -256,7 +266,6 @@ def randomFieldPosition():
 
 #######################################################################
 
-
 # Checks home region for presence of markers. If a marker of my color is
 # at home, returns True and initializes the pusher so that it will push 
 # the first marker found at home to a random region on the board. If no
@@ -280,86 +289,133 @@ def checkHome(pusher, pushers, markers, candidates):
                 return True
     return False
 
+def checkHome2(pusher, pushers, markers, candidates):
+    for i,m in enumerate(markers):  
+        if atHome(m): 
+            # ignore marker if other pusher is taking care of it
+            for p in pushers: 
+                if p.busy and p.mdex == i: break
+            else:
+                candidate = random.choice(candidates)
+                candidates.remove(candidate)
+                pusher.mdex = i
+                pusher.targetPos = Vector2D(candidate.pos.x,candidate.pos.y) 
+                #pusher.targetPos = randomFieldPosition()
+                pusher.busy = True
+                pusher.jobTime = 0
+                return True
+    return False
+
+
+
+
+# initialize vertexList with list of x,y,z vertices read from stdio 
+def readVertices():
+    vertexList = []
+    n = int( sys.stdin.readline() )
+    # read list of points in the map.
+    for i in range( n ):
+        tokens = string.split( sys.stdin.readline() )
+        vertexList.append( Vector3D( int( tokens[ 0 ] ), 
+                                   int( tokens[ 1 ] ),
+                                   int( tokens[ 2 ] ) ) )
+    return tuple(vertexList)
+
+def readVertices2():
+    n = int( sys.stdin.readline() )
+    vertices = tuple([Vertex() for i in xrange(n)])
+    # read list of points in the map.
+    for vertex in vertices:
+        vert_tokens = [int(i) for i in string.split( sys.stdin.readline() )]
+        vertex.pos = Vector3D(*tuple(vert_tokens))    
+    return vertices
+
+
+def readRegions():
+    n = int( sys.stdin.readline() )
+    # List of regions in the map
+    regionList = []
+    for i in range( n ):
+        tokens = string.split( sys.stdin.readline() )
+        # build a vertex list for the region.
+        m = int( tokens[ 0 ] )
+        regionList.append( [] )
+        for j in range( m ):
+            regionList[ i ].append( int( tokens[ j + 1 ] ) )
+    return tuple(regionList)
+
+def readRegions2(vertices): 
+    n = int(sys.stdin.readline())
+    regions = tuple([Region() for i in xrange(n)]) 
+    for region in regions:
+        vert_indices =[int(i) for i in string.split(sys.stdin.readline())][1:]
+        region.vertices = [vertices[i] for i in vert_indices]  
+    return regions
+  
+def updateRegionColors(regions):
+    # update regions' colors
+    colorTokens = string.split(sys.stdin.readline())
+    regionColors = tuple([int(color) for color in colorTokens[1:]]) 
+    for i,region in enumerate(regions):
+        region.color = regionColors[i]
+    # update vertices' incident colors
+    for region in regions:
+        for vertex in region.vertices:
+            vertex.colors |= 1 << region.color
+
+# return tuple (myPushers, oppPushers). myPushers, oppPushers are each a tuple
+# of pushers. myPushers are of my color. oppPushers are of the opponents' color
+def updatePushers(pushers):
+    # Read number of pushers. Value is already known to be 6
+    sys.stdin.readline()
+    #pushers = tuple([Pusher() for i in xrange(n)]) 
+    # Update each pusher with position, velocity read from std in.
+    for p in pushers:
+        tokens = string.split( sys.stdin.readline() )
+        p.pos.x = float(tokens[0])
+        p.pos.y = float(tokens[1])
+        p.vel.x = float(tokens[2])
+        p.vel.y = float(tokens[3])
+    #return (pushers[:n/2]), tuple(pushers[n/2:])
+
+def updateMarkers(markers):
+    # Read number of markers. Value is already known.
+    sys.stdin.readline()
+    #markers = tuple([Marker() for i in xrange(n)])
+    # Update each marker with position, velocity, and color read from std in.
+    for m in markers:
+        tokens = string.split( sys.stdin.readline() ) 
+        m.pos.x = float(tokens[0])
+        m.pos.y = float(tokens[1])
+        m.vel.x = float(tokens[2])
+        m.vel.y = float(tokens[3])
+        m.color = int(tokens[4])
+
+
 
 #######################################################################
 
 # current score for each player.
-score = [ 0, 0 ]
+scores = [ 0, 0 ]
 
 # Read the static parts of the map.
+vertices = readVertices2()
+regions = readRegions2(vertices)
 
-# Read the list of vertex locations.
-n = int( sys.stdin.readline() )
-# List of points in the map.
-vertexList = []
-for i in range( n ):
-    tokens = string.split( sys.stdin.readline() )
-    vertexList.append( Vector3D( int( tokens[ 0 ] ), 
-                                 int( tokens[ 1 ] ),
-                                 int( tokens[ 2 ] ) ) )
-
-# Read the list of region outlines.
-n = int( sys.stdin.readline() )
-# List of regions in the map
-regionList = []
-for i in range( n ):
-    tokens = string.split( sys.stdin.readline() )
-    # build a vertex list for the region.
-    m = int( tokens[ 0 ] )
-    regionList.append( [] )
-    for j in range( m ):
-        regionList[ i ].append( int( tokens[ j + 1 ] ) )
-
-# List of current region colors, pusher and marker locations.
 # These are updated on every turn snapshot from the game.
-regionColors = [ GREY for x in regionList ]
-pList = [ Pusher() for x in range( 2 * PCOUNT ) ]
-mList = []
+pList = tuple([ Pusher() for x in xrange( 2 * PCOUNT ) ])
+mList = tuple([Marker() for i in xrange(MCOUNT)])
 
-vertexColors = [0 for x in vertexList]
+#vertexColors = [0 for x in vertexList]
 
 turnNum = int( sys.stdin.readline() )
 while turnNum >= 0:
-    tokens = string.split( sys.stdin.readline() )
-    score[ RED ] = int( tokens[ 0 ] )
-    score[ BLUE ] = int( tokens[ 1 ] )
-
-    # Read all the region colors.
-    tokens = string.split( sys.stdin.readline() )
-    for i in range( len( regionList ) ):
-        regionColors[ i ] = int( tokens[ i + 1 ] )
-    
-     # compute a bit vector for colors incident on vertices  
-    for i, color in enumerate(regionColors):    
-        for verInd in regionList[i]:
-            vertexColors[verInd] |= 1 << regionColors[i]
-
-    # create candidate vertices touching at least one red region,
-    # but not only red regions
-    candidates = []
-    for i,verCol in enumerate(vertexColors):
-        if (verCol & 1 << RED) == 1 and verCol != 1 << RED:
-            candidates.append(i)
-        
-    # Read all the pusher locations.
-    n = int( sys.stdin.readline() )
-    for i in range( len( pList ) ):
-        tokens = string.split( sys.stdin.readline() )
-        pList[ i ].pos.x = float( tokens[ 0 ] )
-        pList[ i ].pos.y = float( tokens[ 1 ] )
-        pList[ i ].vel.x = float( tokens[ 2 ] )
-        pList[ i ].vel.y = float( tokens[ 3 ] )
-
-    # Read all the marker locations.
-    n = int( sys.stdin.readline() )
-    mList = [ Marker() for x in range( n ) ]
-    for i in range( n ):
-        tokens = string.split( sys.stdin.readline() )
-        mList[ i ].pos.x = float( tokens[ 0 ] )
-        mList[ i ].pos.y = float( tokens[ 1 ] )
-        mList[ i ].vel.x = float( tokens[ 2 ] )
-        mList[ i ].vel.y = float( tokens[ 3 ] )
-        mList[ i ].color = int( tokens[ 4 ] )
+    scores = tuple([int(score) for score in string.split(sys.stdin.readline())])
+    updateRegionColors(regions)
+    candidates = [v for v in vertices\
+                  if (v.colors & 1 << RED) == 1 and v.colors != 1 << RED]
+    updatePushers(pList)
+    updateMarkers(mList)
     
     # Choose a next action for each pusher.
     for pdex in range( PCOUNT ):
@@ -377,7 +433,8 @@ while turnNum >= 0:
             if vecSub( mList[ p.mdex ].pos, p.targetPos ).mag() < 5:
                 p.busy = False
 
-        if not p.busy and not checkHome(p, pList, mList, candidates):
+        #if not p.busy and not checkHome(p, pList, mList, candidates):
+        if not p.busy and not checkHome2(p, pList, mList, candidates):
             # Choose a random marker.
             mdex = rnd.randint( 0, len( mList ) - 1 )
 

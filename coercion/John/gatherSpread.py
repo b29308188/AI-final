@@ -132,27 +132,52 @@ class Vector3D:
         self.y = vy
         self.z = vz
 
-# Simple representation for a pusher.
-class Pusher:
-    def __init__( self ):
-        # Position of the Pusher.
-        self.pos = Vector2D( 0, 0 )
+def compute_force(p): 
+    force = Vector2D(0, 0)
+    marker = p.target_marker
+    if getBehind(p, marker, p.targetPos, force):
+        runTo( p.pos, p.vel, 
+               vecSub( marker.pos, vecSub( p.targetPos, marker.pos ).norm() ),
+               force, 0.1 )
+    return force
 
-        # Pusher velocity
-        self.vel = Vector2D( 0, 0 )
+class State:
+    def __init__(self, board, markers, my_pushers, 
+                 opp_pushers, turn_no, scores):
+        self.board = board
+        self.markers = markers
+        self.my_pushers = my_pushers
+        self.opp_pushers = opp_pushers
+        self.turn_no = turn_no
+        self.scores = scores
 
-        # True if this pusher has a job.
-        self.busy = False
+    def update_notification(self):
+        # Process home, opposing markers.
+        self.my_markers = [m for m in self.markers if m.color == RED]
+        self.opp_markers = [m for m in self.markers if m.color == BLUE]
+        self.neut_markers = [m for m in self.markers if m.color == GREY]
 
-        # How long we've been doing the current job.  If
-        # this number gets to large, we'll pick a new job.
-        self.jobTime = 0
+class Board:
+    def __init__(self, regions, vertices):
+        self.regions = regions
+        self.vertices = vertices
+        self.my_regions = [r for r in self.regions if r.color == RED]
+        self.opp_regions = [r for r in self.regions if r.color == BLUE]
+        self.neut_regions = [r for r in self.regions if r.color == GREY]
 
-        # Index of the marker each pusher is working with.
-        self.mdex = 0
 
-        # Location the pusher is trying to move it's marker to.
-        self.targetPos = Vector2D( 0, 0 )
+class Region:
+    def __init__(self):
+        self.color = GREY
+        #self.markers = []
+        self.vertices = []
+
+class Vertex:
+    def __init__(self):
+        self.pos = Vector3D(0,0,0)
+        # colors is a bitmap of colors incident on this vertex.
+        self.colors = 0
+
 
 # Simple representation for a marker.
 class Marker:
@@ -166,18 +191,72 @@ class Marker:
         # Marker color
         self.color = GREY
 
-class Region:
+
+# Simple representation for a pusher.
+class Pusher:
     def __init__( self ):
-        self.color = GREY
-        self.markers = []
-        self.vertices = []
+        # Position of the Pusher.
+        self.pos = Vector2D(0, 0)
 
-class Vertex:
-    def __init__(self):
-        self.pos = Vector3D(0,0,0)
-        # colors is a bitmap of colors incident on this vertex.
-        self.colors = 0
+        # Pusher velocity
+        self.vel = Vector2D(0, 0)
 
+        # True if this pusher has a job.
+        self.busy = False
+
+        # How long we've been doing the current job.  If
+        # this number gets to large, we'll pick a new job.
+        self.jobTime = 0
+
+        # Index of the marker each pusher is working with.
+        self.mdex = 0
+
+        # The marker that this pusher is trying to move.
+        self.target_marker = None
+
+        # Location the pusher is trying to move it's marker to.
+        self.targetPos = Vector2D( 0, 0 )
+
+
+
+class Agent:
+    def get_actions(self, state):        
+        raise NotImplementedError("") 
+        
+
+class GatherMigrateAgent(Agent):
+    def get_actions(self, state):
+        free_pushers = [p for p in state.my_pushers if self.is_free(p)] 
+        moving_markers = [p.target_marker for p in state.my_pushers if not self.is_free(p)]   
+        
+        home_markers = [m for m in state.my_markers if atHome(m) and m not in moving_markers]
+        cand_verts = [v for v in state.board.vertices\
+                      if (v.colors & 1 << RED) == 1 and v.colors != 1 << RED]
+            
+        for h_m in home_markers[:len(free_pushers)]:
+            p = free_pushers.pop()
+            p.target_marker = h_m 
+            # XXX doesn't check empty cand_vert
+            target_vert = cand_verts.pop()
+            p.targetPos = Vector2D(target_vert.pos.x, target_vert.pos.y)
+
+        # otherwise, use pushers to gather markers 
+        cand_markers = [m for m in (state.neut_markers+state.opp_markers)\
+                        if m not in moving_markers]
+        for p in free_pushers:
+            # XXX doesn't check empty cand_markers
+            target_marker = cand_markers.pop()
+            p.target_marker = target_marker
+            p.targetPos = Vector2D(10, 10)
+
+        actions = [compute_force(p) for p in state.my_pushers]
+        return actions
+            
+    def is_free(self, pusher):
+        if(pusher.jobTime > 75 or pusher.target_marker == None or 
+           vecSub( pusher.target_marker.pos, pusher.targetPos ).mag() < 5):
+            return True
+        return False
 
 # Return a copy of x that's constrained to be between low and high.
 def clamp( x, low, high ):
@@ -266,62 +345,23 @@ def randomFieldPosition():
 
 #######################################################################
 
-# Checks home region for presence of markers. If a marker of my color is
-# at home, returns True and initializes the pusher so that it will push 
-# the first marker found at home to a random region on the board. If no
-# markers are at home, returns False and doesn't modify pusher
-def checkHome(pusher, pushers, markers, candidates):
-    for i,m in enumerate(markers):  
-        if atHome(m): 
-            # ignore marker if other pusher is taking care of it
-            for p in pushers: 
-                if p.busy and p.mdex == i: break
-            else:
-                candInd = random.choice(candidates)
-                candVert = vertexList[candInd]
-                candidates.remove(candInd)
-                # otherwise, move to random region on board
-                pusher.mdex = i
-                pusher.targetPos = Vector2D(candVert.x,candVert.y) 
-                #pusher.targetPos = randomFieldPosition()
-                pusher.busy = True
-                pusher.jobTime = 0
-                return True
-    return False
+def create_state():
+    # Read the static parts of the map.
+    vertices = read_vertices()
+    regions = read_regions(vertices)
+    board = Board(regions, vertices)
 
-def checkHome2(pusher, pushers, markers, candidates):
-    for i,m in enumerate(markers):  
-        if atHome(m): 
-            # ignore marker if other pusher is taking care of it
-            for p in pushers: 
-                if p.busy and p.mdex == i: break
-            else:
-                candidate = random.choice(candidates)
-                candidates.remove(candidate)
-                pusher.mdex = i
-                pusher.targetPos = Vector2D(candidate.pos.x,candidate.pos.y) 
-                #pusher.targetPos = randomFieldPosition()
-                pusher.busy = True
-                pusher.jobTime = 0
-                return True
-    return False
+    # These are updated on every turn snapshot from the game.
+    pushers = tuple([ Pusher() for x in xrange( 2 * PCOUNT ) ])
+    markers = tuple([Marker() for i in xrange(MCOUNT)])
+    turn_no = int( sys.stdin.readline() )
+    
+    scores = (0,0)
+    state = State(board, markers, pushers[:PCOUNT], pushers[PCOUNT:], 
+                  turn_no, scores)
+    return state
 
-
-
-
-# initialize vertexList with list of x,y,z vertices read from stdio 
-def readVertices():
-    vertexList = []
-    n = int( sys.stdin.readline() )
-    # read list of points in the map.
-    for i in range( n ):
-        tokens = string.split( sys.stdin.readline() )
-        vertexList.append( Vector3D( int( tokens[ 0 ] ), 
-                                   int( tokens[ 1 ] ),
-                                   int( tokens[ 2 ] ) ) )
-    return tuple(vertexList)
-
-def readVertices2():
+def read_vertices():
     n = int( sys.stdin.readline() )
     vertices = tuple([Vertex() for i in xrange(n)])
     # read list of points in the map.
@@ -330,29 +370,23 @@ def readVertices2():
         vertex.pos = Vector3D(*tuple(vert_tokens))    
     return vertices
 
-
-def readRegions():
-    n = int( sys.stdin.readline() )
-    # List of regions in the map
-    regionList = []
-    for i in range( n ):
-        tokens = string.split( sys.stdin.readline() )
-        # build a vertex list for the region.
-        m = int( tokens[ 0 ] )
-        regionList.append( [] )
-        for j in range( m ):
-            regionList[ i ].append( int( tokens[ j + 1 ] ) )
-    return tuple(regionList)
-
-def readRegions2(vertices): 
+def read_regions(vertices): 
     n = int(sys.stdin.readline())
     regions = tuple([Region() for i in xrange(n)]) 
     for region in regions:
         vert_indices =[int(i) for i in string.split(sys.stdin.readline())][1:]
         region.vertices = [vertices[i] for i in vert_indices]  
     return regions
-  
-def updateRegionColors(regions):
+
+def update_state(state):
+    scores = tuple([int(score) for score in string.split(sys.stdin.readline())])
+    state.scores = scores
+    update_region_colors(state.board.regions)
+    update_pushers(state.my_pushers + state.opp_pushers)
+    update_markers(state.markers)
+    state.update_notification()
+
+def update_region_colors(regions):
     # update regions' colors
     colorTokens = string.split(sys.stdin.readline())
     regionColors = tuple([int(color) for color in colorTokens[1:]]) 
@@ -365,10 +399,9 @@ def updateRegionColors(regions):
 
 # return tuple (myPushers, oppPushers). myPushers, oppPushers are each a tuple
 # of pushers. myPushers are of my color. oppPushers are of the opponents' color
-def updatePushers(pushers):
+def update_pushers(pushers):
     # Read number of pushers. Value is already known to be 6
     sys.stdin.readline()
-    #pushers = tuple([Pusher() for i in xrange(n)]) 
     # Update each pusher with position, velocity read from std in.
     for p in pushers:
         tokens = string.split( sys.stdin.readline() )
@@ -376,12 +409,11 @@ def updatePushers(pushers):
         p.pos.y = float(tokens[1])
         p.vel.x = float(tokens[2])
         p.vel.y = float(tokens[3])
-    #return (pushers[:n/2]), tuple(pushers[n/2:])
+        p.jobTime += 1
 
-def updateMarkers(markers):
+def update_markers(markers):
     # Read number of markers. Value is already known.
     sys.stdin.readline()
-    #markers = tuple([Marker() for i in xrange(n)])
     # Update each marker with position, velocity, and color read from std in.
     for m in markers:
         tokens = string.split( sys.stdin.readline() ) 
@@ -391,89 +423,20 @@ def updateMarkers(markers):
         m.vel.y = float(tokens[3])
         m.color = int(tokens[4])
 
-
-
 #######################################################################
 
-# current score for each player.
-scores = [ 0, 0 ]
+state = create_state()
+while state.turn_no >= 0:
 
-# Read the static parts of the map.
-vertices = readVertices2()
-regions = readRegions2(vertices)
-
-# These are updated on every turn snapshot from the game.
-pList = tuple([ Pusher() for x in xrange( 2 * PCOUNT ) ])
-mList = tuple([Marker() for i in xrange(MCOUNT)])
-
-#vertexColors = [0 for x in vertexList]
-
-turnNum = int( sys.stdin.readline() )
-while turnNum >= 0:
-    scores = tuple([int(score) for score in string.split(sys.stdin.readline())])
-    updateRegionColors(regions)
-    candidates = [v for v in vertices\
-                  if (v.colors & 1 << RED) == 1 and v.colors != 1 << RED]
-    updatePushers(pList)
-    updateMarkers(mList)
-    
-    # Choose a next action for each pusher.
-    for pdex in range( PCOUNT ):
-        p = pList[ pdex ]
-      
-        # See how long this pusher has been doing its job.
-        if p.busy:
-            # Go to idle if we work to long on the same job.
-            p.jobTime += 1
-            if p.jobTime >= 75:
-            #if p.jobTime >= 35:
-                p.busy = False
-
-            # Go back to idle if we finish our job.
-            if vecSub( mList[ p.mdex ].pos, p.targetPos ).mag() < 5:
-                p.busy = False
-
-        #if not p.busy and not checkHome(p, pList, mList, candidates):
-        if not p.busy and not checkHome2(p, pList, mList, candidates):
-            # Choose a random marker.
-            mdex = rnd.randint( 0, len( mList ) - 1 )
-
-            # Make sure we don't have a teammate working on this marker.
-            available = True
-            for j in range( PCOUNT ):
-                if ( j != pdex and
-                     pList[ j ].busy and
-                     pList[ j ].mdex == mdex ):
-                    available = False
-
-            if available:
-                if mList[ mdex ].color == RED:
-                    # Move it to a random spot on the field.
-                    p.mdex = mdex
-                    p.targetPos = randomFieldPosition()
-                    p.busy = True
-                    p.jobTime = 0
-                else:
-                    # This marker isn't our color, try to move it to our
-                    # home and convert it.
-                    p.mdex = mdex
-                    p.targetPos = Vector2D( 10, 10 )
-                    p.busy = True
-                    p.jobTime = 0
-
-        # Choose a move direction in support of our current goal.
-        force = Vector2D( 0, 0 )
-        if p.busy:
-            marker = mList[ p.mdex ]
-        
-            if getBehind( p, marker, p.targetPos, force ):
-                runTo( p.pos, p.vel, 
-                       vecSub( marker.pos, vecSub( p.targetPos, marker.pos ).norm() ),
-                       force, 0.1 )
-
-        sys.stdout.write( "%f %f " % ( force.x, force.y ) )
+    update_state(state)
+    agent = GatherMigrateAgent()
+    actions = agent.get_actions(state)
+    # Write forces corresponding to pushers' next actions
+    for force in actions:
+        sys.stdout.write("%f %f "%(force.x, force.y ))
 
     sys.stdout.write( "\n" )
     sys.stdout.flush()
+    turn_no = int( sys.stdin.readline() )
 
-    turnNum = int( sys.stdin.readline() )
+

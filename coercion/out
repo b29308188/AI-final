@@ -1,0 +1,1530 @@
+0 NOT Busy at turn0
+0:20	90.0	90.0
+Ben/greedy.py:85: RuntimeWarning: invalid value encountered in double_scalars
+  return Vector2D( self.x / m, self.y / m )
+1 NOT Busy at turn0
+1:1	10.0	10.0
+2 NOT Busy at turn0
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn1
+JOB time :1
+0 NOT Busy at turn1
+0:20	90.0	90.0
+1 is Busy at turn1
+JOB time :1
+1 NOT Busy at turn1
+1:1	10.0	10.0
+2 is Busy at turn1
+JOB time :1
+2 NOT Busy at turn1
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn2
+JOB time :1
+0 NOT Busy at turn2
+0:20	90.0	90.0
+1 is Busy at turn2
+JOB time :1
+1 NOT Busy at turn2
+1:1	10.0	10.0
+2 is Busy at turn2
+JOB time :1
+2 NOT Busy at turn2
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn3
+JOB time :1
+0 NOT Busy at turn3
+0:20	90.0	90.0
+1 is Busy at turn3
+JOB time :1
+1 NOT Busy at turn3
+1:1	10.0	10.0
+2 is Busy at turn3
+JOB time :1
+2 NOT Busy at turn3
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn4
+JOB time :1
+0 NOT Busy at turn4
+0:20	90.0	90.0
+1 is Busy at turn4
+JOB time :1
+1 NOT Busy at turn4
+1:1	10.0	10.0
+2 is Busy at turn4
+JOB time :1
+2 NOT Busy at turn4
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn5
+JOB time :1
+0 NOT Busy at turn5
+0:20	90.0	90.0
+1 is Busy at turn5
+JOB time :1
+1 NOT Busy at turn5
+1:1	10.0	10.0
+2 is Busy at turn5
+JOB time :1
+2 NOT Busy at turn5
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn6
+JOB time :1
+0 NOT Busy at turn6
+0:20	90.0	90.0
+1 is Busy at turn6
+JOB time :1
+1 NOT Busy at turn6
+1:1	10.0	10.0
+2 is Busy at turn6
+JOB time :1
+2 NOT Busy at turn6
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn7
+JOB time :1
+0 NOT Busy at turn7
+0:20	90.0	90.0
+1 is Busy at turn7
+JOB time :1
+1 NOT Busy at turn7
+1:1	10.0	10.0
+2 is Busy at turn7
+JOB time :1
+2 NOT Busy at turn7
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn8
+JOB time :1
+0 NOT Busy at turn8
+0:20	90.0	90.0
+1 is Busy at turn8
+JOB time :1
+1 NOT Busy at turn8
+1:1	10.0	10.0
+2 is Busy at turn8
+JOB time :1
+2 NOT Busy at turn8
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn9
+JOB time :1
+0 NOT Busy at turn9
+0:20	90.0	90.0
+1 is Busy at turn9
+JOB time :1
+1 NOT Busy at turn9
+1:1	10.0	10.0
+2 is Busy at turn9
+JOB time :1
+2 NOT Busy at turn9
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn10
+JOB time :1
+0 NOT Busy at turn10
+0:20	90.0	90.0
+1 is Busy at turn10
+JOB time :1
+1 NOT Busy at turn10
+1:1	10.0	10.0
+2 is Busy at turn10
+JOB time :1
+2 NOT Busy at turn10
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn12
+JOB time :1
+0 NOT Busy at turn12
+0:20	90.0	90.0
+1 is Busy at turn12
+JOB time :1
+1 NOT Busy at turn12
+1:1	10.0	10.0
+2 is Busy at turn12
+JOB time :1
+2 NOT Busy at turn12
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn13
+JOB time :1
+0 NOT Busy at turn13
+0:20	90.0	90.0
+1 is Busy at turn13
+JOB time :1
+1 NOT Busy at turn13
+1:1	10.0	10.0
+2 is Busy at turn13
+JOB time :1
+2 NOT Busy at turn13
+2:7	46.6666666667	33.3333333333
+0 is Busy at turn14
+JOB time :1
+0 NOT Busy at turn14
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn14
+JOB time :1
+1 NOT Busy at turn14
+1:1	10.0	10.0
+2 is Busy at turn14
+JOB time :1
+2 NOT Busy at turn14
+2:20	90.0	90.0
+0 is Busy at turn15
+JOB time :1
+0 NOT Busy at turn15
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn15
+JOB time :1
+1 NOT Busy at turn15
+1:1	10.0	10.0
+2 is Busy at turn15
+JOB time :1
+2 NOT Busy at turn15
+2:20	90.0	90.0
+0 is Busy at turn16
+JOB time :1
+0 NOT Busy at turn16
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn16
+JOB time :1
+1 NOT Busy at turn16
+1:1	10.0	10.0
+2 is Busy at turn16
+JOB time :1
+2 NOT Busy at turn16
+2:20	90.0	90.0
+0 is Busy at turn17
+JOB time :1
+0 NOT Busy at turn17
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn17
+JOB time :1
+1 NOT Busy at turn17
+1:1	10.0	10.0
+2 is Busy at turn17
+JOB time :1
+2 NOT Busy at turn17
+2:20	90.0	90.0
+0 is Busy at turn18
+JOB time :1
+1 is Busy at turn18
+JOB time :1
+1 NOT Busy at turn18
+1:1	10.0	10.0
+2 is Busy at turn18
+JOB time :1
+2 NOT Busy at turn18
+2:20	90.0	90.0
+0 is Busy at turn19
+JOB time :2
+1 is Busy at turn19
+JOB time :1
+1 NOT Busy at turn19
+1:1	10.0	10.0
+2 is Busy at turn19
+JOB time :1
+2 NOT Busy at turn19
+2:20	90.0	90.0
+0 is Busy at turn20
+JOB time :3
+1 is Busy at turn20
+JOB time :1
+1 NOT Busy at turn20
+1:1	10.0	10.0
+2 is Busy at turn20
+JOB time :1
+0 is Busy at turn21
+JOB time :4
+1 is Busy at turn21
+JOB time :1
+1 NOT Busy at turn21
+1:1	10.0	10.0
+2 is Busy at turn21
+JOB time :2
+0 is Busy at turn22
+JOB time :5
+1 is Busy at turn22
+JOB time :1
+1 NOT Busy at turn22
+1:1	10.0	10.0
+2 is Busy at turn22
+JOB time :3
+0 is Busy at turn23
+JOB time :6
+1 is Busy at turn23
+JOB time :1
+1 NOT Busy at turn23
+1:1	10.0	10.0
+2 is Busy at turn23
+JOB time :4
+0 is Busy at turn24
+JOB time :7
+0 NOT Busy at turn24
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn24
+JOB time :1
+1 NOT Busy at turn24
+1:1	10.0	10.0
+2 is Busy at turn24
+JOB time :5
+0 is Busy at turn25
+JOB time :1
+0 NOT Busy at turn25
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn25
+JOB time :1
+1 NOT Busy at turn25
+1:1	10.0	10.0
+2 is Busy at turn25
+JOB time :6
+0 is Busy at turn26
+JOB time :1
+0 NOT Busy at turn26
+0:14	53.3333333333	66.6666666667
+1 is Busy at turn26
+JOB time :1
+1 NOT Busy at turn26
+1:1	10.0	10.0
+2 is Busy at turn26
+JOB time :7
+0 is Busy at turn27
+JOB time :1
+0 NOT Busy at turn27
+0:7	46.6666666667	33.3333333333
+1 is Busy at turn27
+JOB time :1
+1 NOT Busy at turn27
+1:1	10.0	10.0
+2 is Busy at turn27
+JOB time :8
+0 is Busy at turn28
+JOB time :1
+0 NOT Busy at turn28
+0:7	46.6666666667	33.3333333333
+1 is Busy at turn28
+JOB time :1
+1 NOT Busy at turn28
+1:1	10.0	10.0
+2 is Busy at turn28
+JOB time :9
+0 is Busy at turn29
+JOB time :1
+0 NOT Busy at turn29
+0:7	46.6666666667	33.3333333333
+1 is Busy at turn29
+JOB time :1
+1 NOT Busy at turn29
+1:1	10.0	10.0
+2 is Busy at turn29
+JOB time :10
+2 NOT Busy at turn29
+2:20	90.0	90.0
+0 is Busy at turn30
+JOB time :1
+0 NOT Busy at turn30
+0:7	46.6666666667	33.3333333333
+1 is Busy at turn30
+JOB time :1
+1 NOT Busy at turn30
+1:1	10.0	10.0
+2 is Busy at turn30
+JOB time :1
+2 NOT Busy at turn30
+2:20	90.0	90.0
+0 is Busy at turn31
+JOB time :1
+0 NOT Busy at turn31
+0:7	46.6666666667	33.3333333333
+1 is Busy at turn31
+JOB time :1
+1 NOT Busy at turn31
+1:1	10.0	10.0
+2 is Busy at turn31
+JOB time :1
+2 NOT Busy at turn31
+2:20	90.0	90.0
+0 is Busy at turn32
+JOB time :1
+0 NOT Busy at turn32
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn32
+JOB time :1
+1 NOT Busy at turn32
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn32
+JOB time :1
+2 NOT Busy at turn32
+2:20	90.0	90.0
+0 is Busy at turn33
+JOB time :1
+0 NOT Busy at turn33
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn33
+JOB time :1
+1 NOT Busy at turn33
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn33
+JOB time :1
+2 NOT Busy at turn33
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn34
+JOB time :1
+0 NOT Busy at turn34
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn34
+JOB time :1
+1 NOT Busy at turn34
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn34
+JOB time :1
+2 NOT Busy at turn34
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn35
+JOB time :1
+0 NOT Busy at turn35
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn35
+JOB time :1
+1 NOT Busy at turn35
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn35
+JOB time :1
+2 NOT Busy at turn35
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn36
+JOB time :1
+0 NOT Busy at turn36
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn36
+JOB time :1
+1 NOT Busy at turn36
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn36
+JOB time :1
+2 NOT Busy at turn36
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn38
+JOB time :1
+1 is Busy at turn38
+JOB time :1
+1 NOT Busy at turn38
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn38
+JOB time :1
+2 NOT Busy at turn38
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn39
+JOB time :2
+1 is Busy at turn39
+JOB time :1
+1 NOT Busy at turn39
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn39
+JOB time :1
+2 NOT Busy at turn39
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn40
+JOB time :3
+1 is Busy at turn40
+JOB time :1
+1 NOT Busy at turn40
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn40
+JOB time :1
+2 NOT Busy at turn40
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn41
+JOB time :4
+1 is Busy at turn41
+JOB time :1
+1 NOT Busy at turn41
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn41
+JOB time :1
+2 NOT Busy at turn41
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn42
+JOB time :5
+1 is Busy at turn42
+JOB time :1
+1 NOT Busy at turn42
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn42
+JOB time :1
+0 is Busy at turn43
+JOB time :6
+1 is Busy at turn43
+JOB time :1
+1 NOT Busy at turn43
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn43
+JOB time :2
+0 is Busy at turn44
+JOB time :7
+1 is Busy at turn44
+JOB time :1
+1 NOT Busy at turn44
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn44
+JOB time :3
+0 is Busy at turn45
+JOB time :8
+1 is Busy at turn45
+JOB time :1
+1 NOT Busy at turn45
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn45
+JOB time :4
+0 is Busy at turn46
+JOB time :9
+1 is Busy at turn46
+JOB time :1
+1 NOT Busy at turn46
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn46
+JOB time :5
+0 is Busy at turn47
+JOB time :10
+1 is Busy at turn47
+JOB time :1
+1 NOT Busy at turn47
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn47
+JOB time :6
+0 is Busy at turn48
+JOB time :11
+1 is Busy at turn48
+JOB time :1
+1 NOT Busy at turn48
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn48
+JOB time :7
+0 is Busy at turn49
+JOB time :12
+1 is Busy at turn49
+JOB time :1
+1 NOT Busy at turn49
+1:7	46.6666666667	33.3333333333
+2 is Busy at turn49
+JOB time :8
+0 is Busy at turn50
+JOB time :13
+1 is Busy at turn50
+JOB time :1
+2 is Busy at turn50
+JOB time :9
+0 is Busy at turn51
+JOB time :14
+1 is Busy at turn51
+JOB time :2
+2 is Busy at turn51
+JOB time :10
+0 is Busy at turn52
+JOB time :15
+1 is Busy at turn52
+JOB time :3
+2 is Busy at turn52
+JOB time :11
+0 is Busy at turn53
+JOB time :16
+1 is Busy at turn53
+JOB time :4
+2 is Busy at turn53
+JOB time :12
+2 NOT Busy at turn53
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn54
+JOB time :17
+1 is Busy at turn54
+JOB time :5
+2 is Busy at turn54
+JOB time :1
+0 is Busy at turn55
+JOB time :18
+1 is Busy at turn55
+JOB time :6
+2 is Busy at turn55
+JOB time :2
+0 is Busy at turn56
+JOB time :19
+1 is Busy at turn56
+JOB time :7
+2 is Busy at turn56
+JOB time :3
+0 is Busy at turn57
+JOB time :20
+1 is Busy at turn57
+JOB time :8
+2 is Busy at turn57
+JOB time :4
+0 is Busy at turn58
+JOB time :21
+1 is Busy at turn58
+JOB time :9
+2 is Busy at turn58
+JOB time :5
+0 is Busy at turn59
+JOB time :22
+0 NOT Busy at turn59
+0:15	66.6666666667	53.3333333333
+1 is Busy at turn59
+JOB time :10
+2 is Busy at turn59
+JOB time :6
+0 is Busy at turn60
+JOB time :1
+0 NOT Busy at turn60
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn60
+JOB time :11
+2 is Busy at turn60
+JOB time :7
+0 is Busy at turn61
+JOB time :1
+0 NOT Busy at turn61
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn61
+JOB time :12
+2 is Busy at turn61
+JOB time :8
+0 is Busy at turn62
+JOB time :1
+0 NOT Busy at turn62
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn62
+JOB time :13
+2 is Busy at turn62
+JOB time :9
+0 is Busy at turn63
+JOB time :1
+0 NOT Busy at turn63
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn63
+JOB time :14
+2 is Busy at turn63
+JOB time :10
+0 is Busy at turn64
+JOB time :1
+0 NOT Busy at turn64
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn64
+JOB time :15
+2 is Busy at turn64
+JOB time :11
+0 is Busy at turn65
+JOB time :1
+0 NOT Busy at turn65
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn65
+JOB time :16
+2 is Busy at turn65
+JOB time :12
+0 is Busy at turn66
+JOB time :1
+0 NOT Busy at turn66
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn66
+JOB time :17
+2 is Busy at turn66
+JOB time :13
+0 is Busy at turn67
+JOB time :1
+0 NOT Busy at turn67
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn67
+JOB time :18
+2 is Busy at turn67
+JOB time :14
+0 is Busy at turn68
+JOB time :1
+0 NOT Busy at turn68
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn68
+JOB time :19
+2 is Busy at turn68
+JOB time :15
+0 is Busy at turn69
+JOB time :1
+0 NOT Busy at turn69
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn69
+JOB time :20
+2 is Busy at turn69
+JOB time :16
+0 is Busy at turn70
+JOB time :1
+0 NOT Busy at turn70
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn70
+JOB time :21
+2 is Busy at turn70
+JOB time :17
+0 is Busy at turn71
+JOB time :1
+0 NOT Busy at turn71
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn71
+JOB time :22
+2 is Busy at turn71
+JOB time :18
+0 is Busy at turn72
+JOB time :1
+0 NOT Busy at turn72
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn72
+JOB time :23
+2 is Busy at turn72
+JOB time :19
+0 is Busy at turn73
+JOB time :1
+0 NOT Busy at turn73
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn73
+JOB time :24
+2 is Busy at turn73
+JOB time :20
+0 is Busy at turn74
+JOB time :1
+0 NOT Busy at turn74
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn74
+JOB time :25
+2 is Busy at turn74
+JOB time :21
+0 is Busy at turn75
+JOB time :1
+0 NOT Busy at turn75
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn75
+JOB time :26
+2 is Busy at turn75
+JOB time :22
+0 is Busy at turn76
+JOB time :1
+0 NOT Busy at turn76
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn76
+JOB time :27
+2 is Busy at turn76
+JOB time :23
+0 is Busy at turn77
+JOB time :1
+0 NOT Busy at turn77
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn77
+JOB time :28
+2 is Busy at turn77
+JOB time :24
+0 is Busy at turn78
+JOB time :1
+0 NOT Busy at turn78
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn78
+JOB time :29
+2 is Busy at turn78
+JOB time :25
+2 NOT Busy at turn78
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn79
+JOB time :1
+0 NOT Busy at turn79
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn79
+JOB time :30
+2 is Busy at turn79
+JOB time :1
+2 NOT Busy at turn79
+2:6	33.3333333333	46.6666666667
+0 is Busy at turn80
+JOB time :1
+0 NOT Busy at turn80
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn80
+JOB time :31
+2 is Busy at turn80
+JOB time :1
+2 NOT Busy at turn80
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn81
+JOB time :1
+0 NOT Busy at turn81
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn81
+JOB time :32
+2 is Busy at turn81
+JOB time :1
+2 NOT Busy at turn81
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn82
+JOB time :1
+0 NOT Busy at turn82
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn82
+JOB time :33
+2 is Busy at turn82
+JOB time :1
+2 NOT Busy at turn82
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn83
+JOB time :1
+0 NOT Busy at turn83
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn83
+JOB time :34
+2 is Busy at turn83
+JOB time :1
+2 NOT Busy at turn83
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn84
+JOB time :1
+0 NOT Busy at turn84
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn84
+JOB time :35
+1 NOT Busy at turn84
+1:1	10.0	10.0
+2 is Busy at turn84
+JOB time :1
+2 NOT Busy at turn84
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn85
+JOB time :1
+0 NOT Busy at turn85
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn85
+JOB time :1
+1 NOT Busy at turn85
+1:1	10.0	10.0
+2 is Busy at turn85
+JOB time :1
+2 NOT Busy at turn85
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn86
+JOB time :1
+0 NOT Busy at turn86
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn86
+JOB time :1
+1 NOT Busy at turn86
+1:1	10.0	10.0
+2 is Busy at turn86
+JOB time :1
+2 NOT Busy at turn86
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn87
+JOB time :1
+0 NOT Busy at turn87
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn87
+JOB time :1
+1 NOT Busy at turn87
+1:1	10.0	10.0
+2 is Busy at turn87
+JOB time :1
+2 NOT Busy at turn87
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn88
+JOB time :1
+0 NOT Busy at turn88
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn88
+JOB time :1
+1 NOT Busy at turn88
+1:1	10.0	10.0
+2 is Busy at turn88
+JOB time :1
+2 NOT Busy at turn88
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn89
+JOB time :1
+0 NOT Busy at turn89
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn89
+JOB time :1
+1 NOT Busy at turn89
+1:1	10.0	10.0
+2 is Busy at turn89
+JOB time :1
+0 is Busy at turn90
+JOB time :1
+0 NOT Busy at turn90
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn90
+JOB time :1
+1 NOT Busy at turn90
+1:1	10.0	10.0
+2 is Busy at turn90
+JOB time :2
+0 is Busy at turn91
+JOB time :1
+0 NOT Busy at turn91
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn91
+JOB time :1
+1 NOT Busy at turn91
+1:1	10.0	10.0
+2 is Busy at turn91
+JOB time :3
+0 is Busy at turn92
+JOB time :1
+0 NOT Busy at turn92
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn92
+JOB time :1
+1 NOT Busy at turn92
+1:1	10.0	10.0
+2 is Busy at turn92
+JOB time :4
+0 is Busy at turn93
+JOB time :1
+0 NOT Busy at turn93
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn93
+JOB time :1
+1 NOT Busy at turn93
+1:1	10.0	10.0
+2 is Busy at turn93
+JOB time :5
+0 is Busy at turn94
+JOB time :1
+0 NOT Busy at turn94
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn94
+JOB time :1
+1 NOT Busy at turn94
+1:1	10.0	10.0
+2 is Busy at turn94
+JOB time :6
+0 is Busy at turn95
+JOB time :1
+0 NOT Busy at turn95
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn95
+JOB time :1
+1 NOT Busy at turn95
+1:1	10.0	10.0
+2 is Busy at turn95
+JOB time :7
+0 is Busy at turn96
+JOB time :1
+0 NOT Busy at turn96
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn96
+JOB time :1
+1 NOT Busy at turn96
+1:1	10.0	10.0
+2 is Busy at turn96
+JOB time :8
+0 is Busy at turn97
+JOB time :1
+0 NOT Busy at turn97
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn97
+JOB time :1
+1 NOT Busy at turn97
+1:1	10.0	10.0
+2 is Busy at turn97
+JOB time :9
+0 is Busy at turn98
+JOB time :1
+0 NOT Busy at turn98
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn98
+JOB time :1
+1 NOT Busy at turn98
+1:1	10.0	10.0
+2 is Busy at turn98
+JOB time :10
+0 is Busy at turn99
+JOB time :1
+0 NOT Busy at turn99
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn99
+JOB time :1
+1 NOT Busy at turn99
+1:1	10.0	10.0
+2 is Busy at turn99
+JOB time :11
+0 is Busy at turn100
+JOB time :1
+0 NOT Busy at turn100
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn100
+JOB time :1
+1 NOT Busy at turn100
+1:1	10.0	10.0
+2 is Busy at turn100
+JOB time :12
+0 is Busy at turn101
+JOB time :1
+0 NOT Busy at turn101
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn101
+JOB time :1
+1 NOT Busy at turn101
+1:1	10.0	10.0
+2 is Busy at turn101
+JOB time :13
+0 is Busy at turn102
+JOB time :1
+0 NOT Busy at turn102
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn102
+JOB time :1
+1 NOT Busy at turn102
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn102
+JOB time :14
+0 is Busy at turn103
+JOB time :1
+0 NOT Busy at turn103
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn103
+JOB time :1
+1 NOT Busy at turn103
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn103
+JOB time :15
+0 is Busy at turn104
+JOB time :1
+0 NOT Busy at turn104
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn104
+JOB time :1
+1 NOT Busy at turn104
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn104
+JOB time :16
+0 is Busy at turn105
+JOB time :1
+0 NOT Busy at turn105
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn105
+JOB time :1
+1 NOT Busy at turn105
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn105
+JOB time :17
+0 is Busy at turn106
+JOB time :1
+0 NOT Busy at turn106
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn106
+JOB time :1
+1 NOT Busy at turn106
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn106
+JOB time :18
+0 is Busy at turn107
+JOB time :1
+0 NOT Busy at turn107
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn107
+JOB time :1
+1 NOT Busy at turn107
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn107
+JOB time :19
+0 is Busy at turn108
+JOB time :1
+0 NOT Busy at turn108
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn108
+JOB time :1
+1 NOT Busy at turn108
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn108
+JOB time :20
+0 is Busy at turn109
+JOB time :1
+0 NOT Busy at turn109
+0:14	46.6666666667	73.3333333333
+1 is Busy at turn109
+JOB time :1
+1 NOT Busy at turn109
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn109
+JOB time :21
+0 is Busy at turn110
+JOB time :1
+1 is Busy at turn110
+JOB time :1
+1 NOT Busy at turn110
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn110
+JOB time :22
+0 is Busy at turn111
+JOB time :2
+1 is Busy at turn111
+JOB time :1
+1 NOT Busy at turn111
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn111
+JOB time :23
+0 is Busy at turn112
+JOB time :3
+1 is Busy at turn112
+JOB time :1
+1 NOT Busy at turn112
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn112
+JOB time :24
+0 is Busy at turn113
+JOB time :4
+1 is Busy at turn113
+JOB time :1
+1 NOT Busy at turn113
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn113
+JOB time :25
+0 is Busy at turn114
+JOB time :5
+1 is Busy at turn114
+JOB time :1
+1 NOT Busy at turn114
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn114
+JOB time :26
+0 is Busy at turn115
+JOB time :6
+1 is Busy at turn115
+JOB time :1
+1 NOT Busy at turn115
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn115
+JOB time :27
+0 is Busy at turn116
+JOB time :7
+1 is Busy at turn116
+JOB time :1
+1 NOT Busy at turn116
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn116
+JOB time :28
+0 is Busy at turn117
+JOB time :8
+1 is Busy at turn117
+JOB time :1
+1 NOT Busy at turn117
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn117
+JOB time :29
+0 is Busy at turn118
+JOB time :9
+1 is Busy at turn118
+JOB time :1
+1 NOT Busy at turn118
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn118
+JOB time :30
+0 is Busy at turn119
+JOB time :10
+1 is Busy at turn119
+JOB time :1
+1 NOT Busy at turn119
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn119
+JOB time :31
+0 is Busy at turn120
+JOB time :11
+1 is Busy at turn120
+JOB time :1
+1 NOT Busy at turn120
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn120
+JOB time :32
+2 NOT Busy at turn120
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn121
+JOB time :12
+1 is Busy at turn121
+JOB time :1
+1 NOT Busy at turn121
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn121
+JOB time :1
+2 NOT Busy at turn121
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn122
+JOB time :13
+1 is Busy at turn122
+JOB time :1
+1 NOT Busy at turn122
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn122
+JOB time :1
+2 NOT Busy at turn122
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn123
+JOB time :14
+1 is Busy at turn123
+JOB time :1
+1 NOT Busy at turn123
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn123
+JOB time :1
+2 NOT Busy at turn123
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn124
+JOB time :15
+1 is Busy at turn124
+JOB time :1
+1 NOT Busy at turn124
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn124
+JOB time :1
+2 NOT Busy at turn124
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn125
+JOB time :16
+1 is Busy at turn125
+JOB time :1
+1 NOT Busy at turn125
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn125
+JOB time :1
+2 NOT Busy at turn125
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn126
+JOB time :17
+1 is Busy at turn126
+JOB time :1
+1 NOT Busy at turn126
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn126
+JOB time :1
+2 NOT Busy at turn126
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn127
+JOB time :18
+1 is Busy at turn127
+JOB time :1
+2 is Busy at turn127
+JOB time :1
+2 NOT Busy at turn127
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn128
+JOB time :19
+1 is Busy at turn128
+JOB time :2
+2 is Busy at turn128
+JOB time :1
+2 NOT Busy at turn128
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn129
+JOB time :20
+1 is Busy at turn129
+JOB time :3
+2 is Busy at turn129
+JOB time :1
+2 NOT Busy at turn129
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn130
+JOB time :21
+1 is Busy at turn130
+JOB time :4
+2 is Busy at turn130
+JOB time :1
+2 NOT Busy at turn130
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn131
+JOB time :22
+1 is Busy at turn131
+JOB time :5
+2 is Busy at turn131
+JOB time :1
+2 NOT Busy at turn131
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn132
+JOB time :23
+1 is Busy at turn132
+JOB time :6
+2 is Busy at turn132
+JOB time :1
+2 NOT Busy at turn132
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn133
+JOB time :24
+1 is Busy at turn133
+JOB time :7
+2 is Busy at turn133
+JOB time :1
+2 NOT Busy at turn133
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn134
+JOB time :25
+1 is Busy at turn134
+JOB time :8
+2 is Busy at turn134
+JOB time :1
+2 NOT Busy at turn134
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn135
+JOB time :26
+1 is Busy at turn135
+JOB time :9
+2 is Busy at turn135
+JOB time :1
+2 NOT Busy at turn135
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn136
+JOB time :27
+1 is Busy at turn136
+JOB time :10
+2 is Busy at turn136
+JOB time :1
+2 NOT Busy at turn136
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn137
+JOB time :28
+1 is Busy at turn137
+JOB time :11
+2 is Busy at turn137
+JOB time :1
+2 NOT Busy at turn137
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn138
+JOB time :29
+1 is Busy at turn138
+JOB time :12
+2 is Busy at turn138
+JOB time :1
+2 NOT Busy at turn138
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn139
+JOB time :30
+1 is Busy at turn139
+JOB time :13
+2 is Busy at turn139
+JOB time :1
+2 NOT Busy at turn139
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn140
+JOB time :31
+1 is Busy at turn140
+JOB time :14
+2 is Busy at turn140
+JOB time :1
+2 NOT Busy at turn140
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn141
+JOB time :32
+1 is Busy at turn141
+JOB time :15
+2 is Busy at turn141
+JOB time :1
+2 NOT Busy at turn141
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn142
+JOB time :33
+1 is Busy at turn142
+JOB time :16
+2 is Busy at turn142
+JOB time :1
+2 NOT Busy at turn142
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn143
+JOB time :34
+1 is Busy at turn143
+JOB time :17
+2 is Busy at turn143
+JOB time :1
+2 NOT Busy at turn143
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn144
+JOB time :35
+0 NOT Busy at turn144
+0:6	33.3333333333	46.6666666667
+1 is Busy at turn144
+JOB time :18
+2 is Busy at turn144
+JOB time :1
+2 NOT Busy at turn144
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn145
+JOB time :1
+1 is Busy at turn145
+JOB time :19
+1 NOT Busy at turn145
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn145
+JOB time :1
+2 NOT Busy at turn145
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn146
+JOB time :2
+1 is Busy at turn146
+JOB time :1
+1 NOT Busy at turn146
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn146
+JOB time :1
+2 NOT Busy at turn146
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn147
+JOB time :3
+1 is Busy at turn147
+JOB time :1
+1 NOT Busy at turn147
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn147
+JOB time :1
+2 NOT Busy at turn147
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn148
+JOB time :4
+1 is Busy at turn148
+JOB time :1
+1 NOT Busy at turn148
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn148
+JOB time :1
+2 NOT Busy at turn148
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn149
+JOB time :5
+1 is Busy at turn149
+JOB time :1
+1 NOT Busy at turn149
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn149
+JOB time :1
+2 NOT Busy at turn149
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn150
+JOB time :6
+1 is Busy at turn150
+JOB time :1
+1 NOT Busy at turn150
+1:19	93.3333333333	66.6666666667
+2 is Busy at turn150
+JOB time :1
+2 NOT Busy at turn150
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn151
+JOB time :7
+1 is Busy at turn151
+JOB time :1
+1 NOT Busy at turn151
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn151
+JOB time :1
+2 NOT Busy at turn151
+2:15	66.6666666667	53.3333333333
+0 is Busy at turn152
+JOB time :8
+1 is Busy at turn152
+JOB time :1
+1 NOT Busy at turn152
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn152
+JOB time :1
+0 is Busy at turn153
+JOB time :9
+1 is Busy at turn153
+JOB time :1
+1 NOT Busy at turn153
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn153
+JOB time :2
+0 is Busy at turn154
+JOB time :10
+1 is Busy at turn154
+JOB time :1
+1 NOT Busy at turn154
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn154
+JOB time :3
+0 is Busy at turn155
+JOB time :11
+1 is Busy at turn155
+JOB time :1
+1 NOT Busy at turn155
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn155
+JOB time :4
+0 is Busy at turn156
+JOB time :12
+1 is Busy at turn156
+JOB time :1
+1 NOT Busy at turn156
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn156
+JOB time :5
+0 is Busy at turn157
+JOB time :13
+1 is Busy at turn157
+JOB time :1
+1 NOT Busy at turn157
+1:14	53.3333333333	66.6666666667
+2 is Busy at turn157
+JOB time :6
+0 is Busy at turn158
+JOB time :14
+1 is Busy at turn158
+JOB time :1
+2 is Busy at turn158
+JOB time :7
+0 is Busy at turn159
+JOB time :15
+1 is Busy at turn159
+JOB time :2
+2 is Busy at turn159
+JOB time :8
+0 is Busy at turn160
+JOB time :16
+1 is Busy at turn160
+JOB time :3
+2 is Busy at turn160
+JOB time :9
+0 is Busy at turn161
+JOB time :17
+1 is Busy at turn161
+JOB time :4
+2 is Busy at turn161
+JOB time :10
+0 is Busy at turn162
+JOB time :18
+1 is Busy at turn162
+JOB time :5
+2 is Busy at turn162
+JOB time :11
+0 is Busy at turn163
+JOB time :19
+1 is Busy at turn163
+JOB time :6
+2 is Busy at turn163
+JOB time :12
+0 is Busy at turn164
+JOB time :20
+1 is Busy at turn164
+JOB time :7
+2 is Busy at turn164
+JOB time :13
+0 is Busy at turn165
+JOB time :21
+1 is Busy at turn165
+JOB time :8
+2 is Busy at turn165
+JOB time :14
+0 is Busy at turn166
+JOB time :22
+1 is Busy at turn166
+JOB time :9
+2 is Busy at turn166
+JOB time :15
+0 is Busy at turn167
+JOB time :23
+1 is Busy at turn167
+JOB time :10
+2 is Busy at turn167
+JOB time :16
+0 is Busy at turn168
+JOB time :24
+1 is Busy at turn168
+JOB time :11
+2 is Busy at turn168
+JOB time :17
+0 is Busy at turn169
+JOB time :25
+1 is Busy at turn169
+JOB time :12
+2 is Busy at turn169
+JOB time :18
+Traceback (most recent call last):
+  File "Ben/greedy.py", line 413, in <module>
+    turnNum = int( sys.stdin.readline() )
+KeyboardInterrupt

@@ -1,3 +1,4 @@
+
 # A simple player based on the C++ example player, gather.  Feel free
 # to use this as a starting point for your own python player.  The
 # player uses the home region to try to convert markers to the
@@ -15,6 +16,8 @@ import random
 import sys
 import string
 import math
+import numpy as np
+import sys
 
 # Width and height of the world in game units.
 FIELD_SIZE = 100
@@ -57,6 +60,13 @@ BLUE = 1
 
 # Neutral color
 GREY = 2
+
+# Action being performed on marker
+NO_INFLUENCE = 0
+
+MIGRATE = 1
+
+GATHER = 2
 
 # Source of randomness
 rnd = random.Random()
@@ -124,6 +134,10 @@ def vecDot( a, b ):
 def vecPrint( a ):
     sys.stdout.write( "( %f %f )" * ( a.x, a.y ) )
 
+# Return the vector from vectors that is nearest to a
+def nearestVector(a, vectors):
+    return min(vectors, key=lambda v:vecSub(a.pos, v.pos).mag())
+
 # Simple 3D Point/Vector representation.
 class Vector3D:
     # Initialize with given coordinates. */
@@ -141,6 +155,12 @@ def compute_force(p):
                force, 0.1 )
     return force
 
+# return true if marker is 
+def being_coerced(marker):
+    return len(marker.touching_regions) >= 1 and\
+           len([1 for r in marker.touching_regions if r.my_weight < 1]) == 0 and\
+           len([1 for r in marker.touching_regions if r.color != RED]) == 0 
+
 class State:
     def __init__(self, board, markers, my_pushers, 
                  opp_pushers, turn_no, scores):
@@ -156,21 +176,74 @@ class State:
         self.my_markers = [m for m in self.markers if m.color == RED]
         self.opp_markers = [m for m in self.markers if m.color == BLUE]
         self.neut_markers = [m for m in self.markers if m.color == GREY]
+        # Process home, opposing region colors.
+        self.board.my_regions =\
+        [r for r in self.board.regions if r.color == RED]
+        self.board.opp_regions =\
+        [r for r in self.board.regions if r.color == BLUE]
+        self.board.neut_regions =\
+        [r for r in self.board.regions if r.color == GREY]
+
+
+        for r in self.board.regions:
+            r.markers_touching = []
+        # Process markers in regions. 
+        for m in self.markers:
+            m.touching_regions = []
+            # Each circle is approximated as touching a 4X4 square. Iterate
+            # over 16 points representing circle
+            for x in xrange(int(m.pos.x-2),int(m.pos.x+2)):
+                for y in xrange(int(m.pos.y-2), int(m.pos.y+2)):
+                    # Add regions touched by point to regions touched by
+                    # marker.
+                    point_touched = self.board.regions_touched[x][y] 
+                    m.touching_regions = list(set(m.touching_regions+\
+                    point_touched))
+
+            # Indicate to region that marker is touching it
+            for r in m.touching_regions:
+                r.markers_touching.append(m)
+
+        color_weight = {RED:1, BLUE:-1, GREY:-1}
+        for r in self.board.regions:
+            r.my_weight = sum([color_weight[m.color] for m in r.markers_touching])
+
+        #print >> sys.stderr, len(self.board.regions[0].markers_touching)
 
 class Board:
     def __init__(self, regions, vertices):
         self.regions = regions
         self.vertices = vertices
-        self.my_regions = [r for r in self.regions if r.color == RED]
-        self.opp_regions = [r for r in self.regions if r.color == BLUE]
-        self.neut_regions = [r for r in self.regions if r.color == GREY]
+        self.init_regions_touched()
 
+    def init_regions_touched(self):
+        # list of regions touched by every point on the map
+        self.regions_touched = [[[] for y in range(101)] for x in range(101)]
+        for r in self.regions:
+            min_y = min(r.vertices, key=lambda v:v.pos.y).pos.y
+            max_y = max(r.vertices, key=lambda v:v.pos.y).pos.y
+            # Iterate over horizontal lines of polygon.
+            for y in xrange(min_y, max_y+1):
+                verts = r.vertices
+                s = lambda a,b: (a,b) if a.x < b.x else (b,a)
+                edges = [s(v[0].pos,v[1].pos) for v in zip(verts, verts[1:]+[verts[0]])]
+                edges_with_y = [e for e in edges if between(y, e[0].y, e[1].y)]
+                x_vals = [x_on_line(e,y) for e in edges_with_y]
+                x_vals.sort()
+                # mark every point on horizontal line as touching this region
+                for x in xrange(x_vals[0], x_vals[1]+1):
+                    if r not in self.regions_touched[x][y]:
+                        self.regions_touched[x][y].append(r)
+                                
 
 class Region:
     def __init__(self):
         self.color = GREY
-        #self.markers = []
+        self.markers_touching = []
+        self.my_weight = 0
         self.vertices = []
+        self.center = Vector2D(0,0)
+        
 
 class Vertex:
     def __init__(self):
@@ -182,15 +255,14 @@ class Vertex:
 # Simple representation for a marker.
 class Marker:
     def __init__( self ):
-        # Position of the marker.
         self.pos = Vector2D( 0, 0 )
-
-        # Marker velocity
         self.vel = Vector2D( 0, 0 )
-
-        # Marker color
         self.color = GREY
-
+        self.shapely_point = None
+        self.gather = False
+        self.current_influence = NO_INFLUENCE
+        #self.regions = []
+        self.touching_regions = []
 
 # Simple representation for a pusher.
 class Pusher:
@@ -226,37 +298,69 @@ class Agent:
 
 class GatherMigrateAgent(Agent):
     def get_actions(self, state):
-        free_pushers = [p for p in state.my_pushers if self.is_free(p)] 
-        moving_markers = [p.target_marker for p in state.my_pushers if not self.is_free(p)]   
-        
-        home_markers = [m for m in state.my_markers if atHome(m) and m not in moving_markers]
+
+        for p in state.my_pushers:
+            self.check_pusher_done(p)
+       
+        free_pushers = [p for p in state.my_pushers if p.busy == False]
+        cand_migrate_markers = [m for m in state.my_markers if\
+                                m.current_influence == NO_INFLUENCE]
+        # XXX need to check size
         cand_verts = [v for v in state.board.vertices\
                       if (v.colors & 1 << RED) == 1 and v.colors != 1 << RED]
-            
-        for h_m in home_markers[:len(free_pushers)]:
-            p = free_pushers.pop()
-            p.target_marker = h_m 
-            # XXX doesn't check empty cand_vert
-            target_vert = cand_verts.pop()
-            p.targetPos = Vector2D(target_vert.pos.x, target_vert.pos.y)
+        # XXX need to check size
+        cand_gather_markers = [m for m in 
+                               (state.neut_markers+state.opp_markers)\
+                               if m.current_influence == NO_INFLUENCE and\
+                               not being_coerced(m)]
+        cand_gather_regions = [r for r in state.board.my_regions if r.my_weight >= 1]
+        if len(cand_gather_regions) == 0:
+            cand_gather_regions = [state.board.regions[0]]
 
-        # otherwise, use pushers to gather markers 
-        cand_markers = [m for m in (state.neut_markers+state.opp_markers)\
-                        if m not in moving_markers]
         for p in free_pushers:
-            # XXX doesn't check empty cand_markers
-            target_marker = cand_markers.pop()
-            p.target_marker = target_marker
-            p.targetPos = Vector2D(10, 10)
-
+            p.jobTime = 0
+            p.busy = True
+            # XXX need better heuristic for picking between migrate and gather
+            if(len(cand_migrate_markers) > len(state.board.my_regions)):
+                # Migrate nearest marker to candidate vertex.
+                nearest_migrate_marker = min(cand_migrate_markers, 
+                                     key=lambda m:vecSub(p.pos, m.pos).mag())
+                cand_migrate_markers.remove(nearest_migrate_marker)
+                p.target_marker = nearest_migrate_marker
+                target_vert = cand_verts.pop()
+                p.targetPos = Vector2D(target_vert.pos.x, target_vert.pos.y)
+                nearest_migrate_marker.current_influence = MIGRATE
+            else:
+                # Gather nearest marker to pusher, and push to nearest
+                # already captured region.
+                nearest_gather_marker = min(cand_gather_markers, 
+                                     key=lambda m:vecSub(p.pos, m.pos).mag())
+                cand_gather_markers.remove(nearest_gather_marker)
+                nearest_region = min(cand_gather_regions, 
+                                     key=lambda r:vecSub(
+                                     nearest_gather_marker.pos, 
+                                     r.center).mag())
+                p.target_marker = nearest_gather_marker
+                nearest_gather_marker.current_influence = GATHER
+                p.targetPos = Vector2D(nearest_region.center.x,
+                                       nearest_region.center.y)
+ 
         actions = [compute_force(p) for p in state.my_pushers]
         return actions
             
-    def is_free(self, pusher):
-        if(pusher.jobTime > 75 or pusher.target_marker == None or 
-           vecSub( pusher.target_marker.pos, pusher.targetPos ).mag() < 5):
-            return True
-        return False
+    def check_pusher_done(self, pusher): 
+        if(pusher.busy): 
+            pushed_marker = pusher.target_marker
+            # Free pusher if gather marker is already being coerced.
+            cond1 = pushed_marker.current_influence == GATHER and\
+               being_coerced(pushed_marker)
+            # Free pusher if it has been working on marker too long, or if
+            # it has already pushed its marker to the destination
+            cond2 = pusher.jobTime > 75 or\
+               vecSub( pusher.target_marker.pos, pusher.targetPos ).mag() < 5
+            if(cond1 or cond2):
+                pushed_marker.current_influence = NO_INFLUENCE
+                pusher.busy = False
 
 # Return a copy of x that's constrained to be between low and high.
 def clamp( x, low, high ):
@@ -265,6 +369,21 @@ def clamp( x, low, high ):
   if x > high:
     x = high
   return x
+
+def between(x, a, b): 
+    return (a != b) and ((a <= x and x <= b) or (b <= x and x <= a))
+
+# Return x value of point with y value k that is on line e. e is (a,b),
+# where a and b are vertices with a.x <= b.x
+def x_on_line(e, k):
+    # check for vertical line
+    if( e[1].x - e[0].x == 0):
+        return e[0].x
+    slope = float(e[1].y - e[0].y) / float(e[1].x - e[0].x)
+    return int(float(k-e[0].y)/slope + float(e[0].x))
+    
+
+
 
 # Compute a force vector that can be applied to a pusher to get it
 # to run through the given target location.  Pos and vel are the
@@ -375,7 +494,9 @@ def read_regions(vertices):
     regions = tuple([Region() for i in xrange(n)]) 
     for region in regions:
         vert_indices =[int(i) for i in string.split(sys.stdin.readline())][1:]
-        region.vertices = [vertices[i] for i in vert_indices]  
+        region.vertices = [vertices[i] for i in vert_indices]
+        region.center.x = np.mean([v.pos.x for v in region.vertices])
+        region.center.y = np.mean([v.pos.y for v in region.vertices])
     return regions
 
 def update_state(state):

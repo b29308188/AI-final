@@ -1,0 +1,80 @@
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player java -cp java_example Migrate 
+Winner: 0
+Score: 2200 (911600) 1200 (1166200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player java -cp java_example Migrate 
+Winner: 0
+Score: 2400 (1478200) 400 (490400)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player java -cp java_example Migrate 
+Winner: 0
+Score: 4000 (1829000) 400 (476600)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player java -cp java_example Migrate 
+Winner: 0
+Score: 1800 (1450000) 1200 (750200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player java -cp java_example Migrate 
+Winner: 0
+Score: 2400 (1502400) 600 (667000)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python python_example\gather.py 
+Winner: 0
+Score: 2600 (1804000) 800 (591200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python python_example\gather.py 
+Winner: 0
+Score: 2600 (1800000) 1600 (550400)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python python_example\gather.py 
+Winner: 0
+Score: 3000 (2209200) 600 (407200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python python_example\gather.py 
+Winner: 0
+Score: 2200 (1061600) 600 (695000)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python python_example\gather.py 
+Winner: 0
+Score: 3600 (1997600) 600 (412000)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python greedy.py 
+Winner: 0
+Score: 800 (459400) 600 (531200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python greedy.py 
+Winner: 0
+Score: 800 (459400) 600 (531200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python greedy.py 
+Winner: 0
+Score: 800 (459400) 600 (531200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python greedy.py 
+Winner: 0
+Score: 800 (459400) 600 (531200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python greedy.py 
+Winner: 0
+Score: 800 (459400) 600 (531200)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python robber.py 
+Winner: 0
+Score: 600 (524600) 400 (433800)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python robber.py 
+Winner: 0
+Score: 1400 (784600) 400 (463000)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python robber.py 
+Winner: 0
+Score: 800 (467600) 400 (488800)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python robber.py 
+Winner: 1
+Score: 400 (404000) 800 (402600)
+
+C:\Users\TEMP\AI-final>java -jar coercion.jar -player pipe 2 python enhancedRobber.py -player pipe 2 python robber.py 
+Winner: 1
+Score: 400 (385200) 400 (385400)

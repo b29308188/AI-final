@@ -121,9 +121,6 @@ def vecDot( a, b ):
 def vecPrint( a ):
     sys.stdout.write( "( %f %f )" * ( a.x, a.y ) )
 
-def vecToString(a):
-    return "( " + str(a.x) + ", " + str(a.y) + " )"    
-
 # Simple 3D Point/Vector representation.
 class Vector3D:
     # Initialize with given coordinates. */
@@ -251,16 +248,14 @@ def randomFieldPosition():
     return Vector2D( rnd.uniform( MARKER_RADIUS, FIELD_SIZE - MARKER_RADIUS ),
                      rnd.uniform( MARKER_RADIUS, FIELD_SIZE - MARKER_RADIUS ) )
 
-def printPusherState(p):
-    print >> sys.stderr, "POS", vecToString(p.pos)
-
+# return ture if there's marker with specific color
 def hasMarkerWithColor(mColor):
     for m in mList:
         if m.color == mColor:
             return True
     return False
 
-
+# return the index of the nearest marker regards to the specific pusher
 def nearestMarker(pusher):
     minDist = float("inf")
     minDistM = mList[0]
@@ -272,7 +267,7 @@ def nearestMarker(pusher):
                   
     return mList.index(minDistM)
 
-
+# return the index of the nearest marker with specific color regards to the specific pusher
 def nearestMarkerWithColor(pusher, mColor):
     minDist = float("inf")
     minDistM = mList[0]
@@ -285,8 +280,8 @@ def nearestMarkerWithColor(pusher, mColor):
     
     return mList.index(minDistM)
 
-                    
-def nearestGreyRegion(pos):
+
+def nearestNotRedRegion(pos):
     vertexColors = [ RED for x in vertexList ]
     
     # Compute a bit vector for the region colors incident on each vertex.
@@ -309,7 +304,16 @@ def nearestGreyRegion(pos):
             minDistVertice = vertexList2D[candidates[i]]
         
     return minDistVertice
-    
+
+# return if the current marker is being pushed by others
+def isAvailable(mdex):
+    available = True
+    for j in range( PCOUNT ):
+        if ( j != pdex and pList[ j ].busy and pList[ j ].mdex == mdex ):
+            available = False
+            
+    return available
+
 #######################################################################
 
 # current score for each player.
@@ -329,6 +333,12 @@ for i in range( n ):
                                  int( tokens[ 2 ] ) ) )
     vertexList2D.append( Vector2D( int( tokens[0] ), int( tokens[1] ) ) )
 
+# for i in range( n ):
+    # tokens = string.split( sys.stdin.readline() )
+    # vertexList.append( Vector3D( int( tokens[ 0 ] ), 
+                                 # int( tokens[ 1 ] ),
+                                 # int( tokens[ 2 ] ) ) )
+
 # Read the list of region outlines.
 n = int( sys.stdin.readline() )
 # List of regions in the map
@@ -340,8 +350,6 @@ for i in range( n ):
     regionList.append( [] )
     for j in range( m ):
         regionList[ i ].append( int( tokens[ j + 1 ] ) )
-        
-#print >> sys.stderr, regionList
 
 # List of current region colors, pusher and marker locations.
 # These are updated on every turn snapshot from the game.
@@ -397,12 +405,15 @@ while turnNum >= 0:
     
         if not p.busy:
             # Choose a random marker.
-            mdex = rnd.randint( 0, len( mList ) - 1 )
             
             if hasMarkerWithColor(BLUE):
                 mdex = nearestMarkerWithColor(p, BLUE)
+                if not isAvailable(mdex):
+                    # mdex = nearestMarkerWithColor(p, GREY)
+                    mdex = nearestMarker(p)
             else:
-                mdex = nearestMarker(p)                
+                # mdex = nearestMarkerWithColor(p, GREY)
+                mdex = nearestMarker(p)
 
             # Make sure we don't have a teammate working on this marker.
             available = True
@@ -416,13 +427,8 @@ while turnNum >= 0:
                 if mList[ mdex ].color == RED:
                     # Move it to a random spot on the field.
                     p.mdex = mdex
-                    p.targetPos = nearestGreyRegion(mList[ mdex ].pos)
-                    p.busy = True
-                    p.jobTime = 0
-                elif mList[ mdex ].color == BLUE:
-                    # Move it to a random spot on the field.
-                    p.mdex = mdex
-                    p.targetPos = randomFieldPosition()
+                    #p.targetPos = randomFieldPosition()
+                    p.targetPos = nearestNotRedRegion(mList[ mdex ].pos)
                     p.busy = True
                     p.jobTime = 0
                 else:
@@ -437,9 +443,6 @@ while turnNum >= 0:
         force = Vector2D( 0, 0 )
         if p.busy:
             marker = mList[ p.mdex ]
-            
-            if marker.color == RED:
-                p.targetPos = nearestGreyRegion(marker.pos)
         
             if getBehind( p, marker, p.targetPos, force ):
                 runTo( p.pos, p.vel, 

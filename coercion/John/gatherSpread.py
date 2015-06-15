@@ -159,7 +159,7 @@ def compute_force(p):
 def being_coerced(marker):
     return len(marker.touching_regions) >= 1 and\
            len([1 for r in marker.touching_regions if r.my_weight < 1]) == 0 and\
-           len([1 for r in marker.touching_regions if r.color != RED]) == 0 
+           len([1 for r in marker.touching_regions if r.color != RED]) == 0  
 
 class State:
     def __init__(self, board, markers, my_pushers, 
@@ -303,16 +303,25 @@ class GatherMigrateAgent(Agent):
             self.check_pusher_done(p)
        
         free_pushers = [p for p in state.my_pushers if p.busy == False]
+        # Candidate migrate markers are our markers that we are not 
+        # currently not migrating
         cand_migrate_markers = [m for m in state.my_markers if\
                                 m.current_influence == NO_INFLUENCE]
-        # XXX need to check size
+        # Candidate vertices are vertices touched by red regions, but not only
+        # touched by red regions. There should always be at least 3 candidate
+        # vertices because of opponent's home region
         cand_verts = [v for v in state.board.vertices\
                       if (v.colors & 1 << RED) == 1 and v.colors != 1 << RED]
-        # XXX need to check size
+
+        # Candidate gather markers are markers not of our color that we are
+        # currently not pushing or coercing.
         cand_gather_markers = [m for m in 
                                (state.neut_markers+state.opp_markers)\
                                if m.current_influence == NO_INFLUENCE and\
                                not being_coerced(m)]
+        if len(cand_gather_markers) == 0:
+            cand_gather_markers = state.markers
+
         cand_gather_regions = [r for r in state.board.my_regions if r.my_weight >= 1]
         if len(cand_gather_regions) == 0:
             cand_gather_regions = [state.board.regions[0]]
@@ -321,6 +330,11 @@ class GatherMigrateAgent(Agent):
             p.jobTime = 0
             p.busy = True
             # XXX need better heuristic for picking between migrate and gather
+            percent_markers = float(len(state.my_markers)) / float(MCOUNT)
+            percent_regions = float(len(state.board.my_regions)) / float(len(state.board.regions))
+
+#            if(percent_markers > percent_regions and \
+#               len(cand_migrate_markers) >= 1):
             if(len(cand_migrate_markers) > len(state.board.my_regions)):
                 # Migrate nearest marker to candidate vertex.
                 nearest_migrate_marker = min(cand_migrate_markers, 
@@ -336,10 +350,12 @@ class GatherMigrateAgent(Agent):
                 nearest_gather_marker = min(cand_gather_markers, 
                                      key=lambda m:vecSub(p.pos, m.pos).mag())
                 cand_gather_markers.remove(nearest_gather_marker)
+
                 nearest_region = min(cand_gather_regions, 
                                      key=lambda r:vecSub(
                                      nearest_gather_marker.pos, 
                                      r.center).mag())
+
                 p.target_marker = nearest_gather_marker
                 nearest_gather_marker.current_influence = GATHER
                 p.targetPos = Vector2D(nearest_region.center.x,

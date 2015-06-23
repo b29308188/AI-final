@@ -19,3 +19,6 @@ https://github.com/hoganlong/ICPC-Entry
 This week works(5/26~6/2)--
 For each group member, write a simple agent (maybe hueristics) to beat the two example agents.
 Define the utility function for more complicated agents in the future.
+
+enhenced robber (red) v.s. greedy (blue)
+https://youtu.be/Te5RMcgESbc
